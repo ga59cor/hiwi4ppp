@@ -17,7 +17,7 @@ for ii=1:r3
 end
 
 %tempData = tempData(sum(isnan(tempData),2)==0);
-t = (datetime(tempData(:,1),'convertfrom','modifiedjuliandate'));   %Sidereal-filtering shifted datetime stored in t
+t = (datetime(tempData(:,12),'convertfrom','modifiedjuliandate'));   %Sidereal-filtering shifted datetime stored in t
 
 figure('Name',strcat("Unshifted data for stn ",stnName),'NumberTitle','off')
 

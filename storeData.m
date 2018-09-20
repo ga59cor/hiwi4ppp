@@ -27,9 +27,20 @@ for k = startSess:finSess
         
         %Sidereal shifting: each successive day's epoch is shifted 4 min
         %bakward. The shifted epochs are saved in the 13th col
-        kinData(:,12)   = kinData(:,1) - (ii-1)*fourMinShift;
-        
+%         kinData(:,12)   = kinData(:,1) - (ii-1)*fourMinShift;
+%         
+%         [n,~]           = size(kinData);
+%         stnKinData(1:n,:,ii)    = kinData;                 %Store successive iith session's kin data
+%         
+%         ii = ii+ 1; 
+        kinData(:,12)   = (kinData(:,1)-fix(kinData(:,1))) - (ii-1)*fourMinShift;
         [n,~]           = size(kinData);
+        for i=1:n
+            if kinData(i,12) < 0
+                kinData(i,12) = nan;
+            end
+        end
+        kinData(:,12)   = fix(kinData(:,1))+kinData(:,12);
         stnKinData(1:n,:,ii)    = kinData;                 %Store successive iith session's kin data
         
         ii = ii+ 1; 

@@ -43,19 +43,34 @@ toc
 
 
 %Plot data without shifting
-
-% plotUnfilData('WTCO',stn1KinData);   %WTCO
-% plotUnfilData('WTZA',stn2KinData);   %WTZA
-% plotUnfilData('WTZS',stn3KinData);   %WTZS
-% plotUnfilData('WTZZ',stn4KinData);   %WTZZ
-
+% tic
+%  plotUnfilData('WTCO',stn1KinData);   %WTCO
+%  plotUnfilData('WTZA',stn2KinData);   %WTZA
+%  plotUnfilData('WTZS',stn3KinData);   %WTZS
+%  plotUnfilData('WTZZ',stn4KinData);   %WTZZ
+% toc
 
 %Sidereal-filtered data (shifted by 4min per day)
 %plotParam - Define what to plot:1 for N-Nbar, 2 for E-Ebar, 3 for U-Ubar
 
-plotData('WTCO',stn1KinData,2);   %WTCO 
-% plotData('WTZA',stn2KinData,2);   %WTZA
-% plotData('WTZS',stn2KinData,2);   %WTZS
-% plotData('WTZZ',stn2KinData,2);   %WTZZ
+%prompt = 'Which offset to plot after sidereal filtering? N/E/U :';         
+plotParamPrompt = input('Which offset to plot after sidereal filtering? N/E/U :', 's');
+switch plotParamPrompt
+    case 'N'
+        plotParam = 1;
+    case 'E'
+        plotParam = 2;
+    case 'U'
+        plotParam = 3;
+    otherwise
+        disp("No/invalid input. Defaulting to N!")
+        plotParam = 1;
+end
 
+tic  
+ plotData('WTCO',stn1KinData,plotParam);   %WTCO 
+ plotData('WTZA',stn2KinData,plotParam);   %WTZA
+ plotData('WTZS',stn2KinData,plotParam);   %WTZS
+ plotData('WTZZ',stn2KinData,plotParam);   %WTZZ
+toc
 
