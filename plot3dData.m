@@ -26,12 +26,6 @@ end
 figure('Name',strcat("Std. dev. data for stn ",stnName),'NumberTitle','off')
 grid on; hold on;
 [r1,~,r3] = size(stnData);
-%legendInfo = strings(r3,1);
-
-
-
-%plot3 (timeofday(t),stnData(:,plotParam,ii),1:r3);                                  %Extract time of day from t     
-%legendInfo(ii) = strcat("Session #",num2str(ii));
 
 switch sidFiltParam
     case 'y'
@@ -40,12 +34,14 @@ switch sidFiltParam
             plot3 (timeofday(t),(datetime(fix(stnData(1:r1,12,ii)),'convertfrom','modifiedjuliandate'))',stnData(:,plotParam,ii));
         end
         view (3)
+        
     case 'n'
         for ii = 1: r3
             t = (datetime(stnData(1:r1,1,ii),'convertfrom','modifiedjuliandate'))';   %No sidereal filtering
             plot3 (timeofday(t),(datetime(fix(stnData(1:r1,12,ii)),'convertfrom','modifiedjuliandate'))',stnData(:,plotParam,ii));
         end
         view (3)
+        
     otherwise
         disp("Received no input. Defaulting to Y!");
         sidFiltParam = 'y';
@@ -54,6 +50,7 @@ switch sidFiltParam
             plot3 (timeofday(t),(datetime(fix(stnData(1:r1,12,ii)),'convertfrom','modifiedjuliandate'))',stnData(:,plotParam,ii));
         end
         view (3)
+        
 end
 %legend(legendInfo,'Location','NorthEast')
 xlabel('Epochs'), ylabel('Session'), zlabel('Offsets')
