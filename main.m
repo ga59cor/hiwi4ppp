@@ -1,4 +1,4 @@
-clc; clear all; close all;
+clc; clear all; %close all;
 
 
 parentdir       = '/Users/voyager/Desktop/hiwi4ppp/temp_KIN/';
@@ -54,7 +54,7 @@ toc
 %plotParam - Define what to plot:1 for N-Nbar, 2 for E-Ebar, 3 for U-Ubar
 
 %prompt = 'Which offset to plot after sidereal filtering? N/E/U :';         
-plotParamPrompt = input('Which offset to plot after sidereal filtering? N/E/U :', 's');
+plotParamPrompt = input('Which offset to plot? N/E/U :', 's');
 switch plotParamPrompt
     case 'N'
         plotParam = 1;
@@ -67,10 +67,25 @@ switch plotParamPrompt
         plotParam = 1;
 end
 
+
+sidFiltPrompt = input('Sidereal filtering shift? y/n (Default y):', 's');
+if isempty(sidFiltPrompt)
+    disp("No valid input. Defaulting to y!");
+    sidFiltPrompt = 'y';
+end
+% 
+% tic  
+%  plotData('WTCO',stn1KinData,plotParam);   %WTCO 
+%  plotData('WTZA',stn2KinData,plotParam);   %WTZA
+%  plotData('WTZS',stn2KinData,plotParam);   %WTZS
+%  plotData('WTZZ',stn2KinData,plotParam);   %WTZZ
+% toc
+
 tic  
- plotData('WTCO',stn1KinData,plotParam);   %WTCO 
- plotData('WTZA',stn2KinData,plotParam);   %WTZA
- plotData('WTZS',stn2KinData,plotParam);   %WTZS
- plotData('WTZZ',stn2KinData,plotParam);   %WTZZ
+%  plot3dData('WTCO',stn1KinData,plotParam);   %WTCO 
+ plot3dData('WTZA',stn2KinData,plotParam,sidFiltPrompt);   %WTZA
+%  plot3dData('WTZS',stn2KinData,plotParam);   %WTZS
+%  plot3dData('WTZZ',stn2KinData,plotParam);   %WTZZ
 toc
+
 

@@ -5,6 +5,10 @@ function plotUnfilData(stnName,stnData)
 % stnData = stn2KinData;
 %plotParam = plotParam + 8;  %translate N,E,U to column number
 %figure(1);
+if isempty(stnData)
+    disp("No data received. Ending process!");
+    return;
+end
 
 [~,r2,r3] = size(stnData);
 tempData = nan(1,r2);               %init a 2D matrix to store data to be plotted

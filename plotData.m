@@ -1,6 +1,11 @@
 function plotData(stnName,stnData,plotParam)
 % stnName = "WTZA";
 % stnData = stn1KinData;
+if isempty(stnData)
+    disp("No data received. Ending process!");
+    return;
+end
+
 plotParam = plotParam + 8;  %translate N,E,U to column number
 
 switch plotParam
